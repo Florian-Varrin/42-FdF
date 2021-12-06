@@ -1,0 +1,10 @@
+*.bak
+*.swp
+*.swo
+*.o
+*.out
+*.a
+compile_commands.json
+.cache
+.idea
+fdf
