@@ -6,7 +6,7 @@
 #    By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 10:27:38 by fvarrin           #+#    #+#              #
-#    Updated: 2021/12/06 11:54:26 by fvarrin          ###   ########.fr        #
+#    Updated: 2021/12/08 13:39:06 by fvarrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,30 +14,36 @@ ROOT_DIR		?= $(shell pwd)
 SRC_DIR			= ${ROOT_DIR}/srcs/
 HEADER_DIR		= ${ROOT_DIR}/includes/
 LIBFT_DIR		= ${ROOT_DIR}/libft/
+MLX_DIR			= ${ROOT_DIR}/minilibx_macos/
 SRC			= $(addprefix ${SRC_DIR}, main.c)
 OBJ			= $(SRC:.c=.o)
 NAME 			= fdf
 NORM_BIN		= norminette
 NORM_FLAGS		= -RCheckForbiddenSourceHeader -RCheckDefine
 RM			= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}/includes
+CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}
 CC			= gcc
+MLX_FLAGS		= -L${MLX_DIR} -lmlx -framework OpenGL -framework AppKit
 LIBFT_FLAGS		= -L${LIBFT_DIR} -lft
+BUFFER_SIZE		= 1024
 
 .PHONY: 	all clean fclean re
 
 ${NAME}:	${OBJ}
-		@make -C ${LIBFT_DIR} all || true
-		${CC} ${CFLAGS} ${OBJ} ${LIBFT_FLAGS} -o ${NAME}
+		@make -C ${LIBFT_DIR} BUFFER_SIZE=${BUFFER_SIZE} all || true
+		@make -C ${MLX_DIR} || true
+		${CC} ${CFLAGS} ${OBJ} ${LIBFT_FLAGS} ${MLX_FLAGS} -o ${NAME}
 
 all: 		${NAME}
 
 clean:
 		${RM} ${OBJ}
+		@make -C ${LIBFT_DIR} clean || true
+		@make -C ${MLX_DIR} clean || true
 		${RM} ${TEST_OBJ}
 
 fclean: 	clean
-		@make -C libft fclean || true
+		@make -C ${LIBFT_DIR} fclean || true
 		${RM} ${NAME}
 		${RM} ${TEST_NAME}
 

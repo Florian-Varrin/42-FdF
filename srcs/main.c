@@ -6,12 +6,15 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2021/12/06 11:52:42 by fvarrin          ###   ########.fr       */
+/*   Updated: 2021/12/08 12:49:28 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int argc, char **argv)
+#include <mlx.h>
+
+int	main(void)
 {
-	(void) argc;
-	(void) argv;
+	void	*mlx;
+
+	mlx = mlx_init();
 }
