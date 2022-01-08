@@ -6,32 +6,40 @@
 #    By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 10:27:38 by fvarrin           #+#    #+#              #
-#    Updated: 2021/12/08 13:39:06 by fvarrin          ###   ########.fr        #
+#    Updated: 2022/01/08 15:37:44 by fvarrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# DIRS
 ROOT_DIR		?= $(shell pwd)
 SRC_DIR			= ${ROOT_DIR}/srcs/
 HEADER_DIR		= ${ROOT_DIR}/includes/
 LIBFT_DIR		= ${ROOT_DIR}/libft/
-MLX_DIR			= ${ROOT_DIR}/minilibx_macos/
+MLX_DIR			= ${ROOT_DIR}/minilibx-wrapper/
+
+# COMPILER
 SRC			= $(addprefix ${SRC_DIR}, main.c)
 OBJ			= $(SRC:.c=.o)
 NAME 			= fdf
 NORM_BIN		= norminette
 NORM_FLAGS		= -RCheckForbiddenSourceHeader -RCheckDefine
 RM			= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}
+CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}includes
 CC			= gcc
-MLX_FLAGS		= -L${MLX_DIR} -lmlx -framework OpenGL -framework AppKit
 LIBFT_FLAGS		= -L${LIBFT_DIR} -lft
 BUFFER_SIZE		= 1024
+ifeq ($(UNAME_S),Linux)
+	MLX_FLAGS	= -L${MLX_DIR} -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd
+endif
+ifeq ($(UNAME_S),Darwin)
+	MLX_FLAGS	= -L${MLX_DIR} -lmlx -framework OpenGL -framework AppKit
+endif
 
 .PHONY: 	all clean fclean re
 
 ${NAME}:	${OBJ}
 		@make -C ${LIBFT_DIR} BUFFER_SIZE=${BUFFER_SIZE} all || true
-		@make -C ${MLX_DIR} || true
+		@make -C ${MLX_DIR} 
 		${CC} ${CFLAGS} ${OBJ} ${LIBFT_FLAGS} ${MLX_FLAGS} -o ${NAME}
 
 all: 		${NAME}
