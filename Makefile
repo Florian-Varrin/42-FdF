@@ -6,7 +6,7 @@
 #    By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 10:27:38 by fvarrin           #+#    #+#              #
-#    Updated: 2022/02/16 13:42:27 by fvarrin          ###   ########.fr        #
+#    Updated: 2022/02/16 17:53:20 by fvarrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ LIBFT_DIR		= ${ROOT_DIR}/libft/
 MLX_DIR			= ${ROOT_DIR}/minilibx-wrapper/
 
 # COMPILER
-SRC			= $(addprefix ${SRC_DIR}, main.c init.c draw.c line.c)
+SRC			= $(addprefix ${SRC_DIR}, main.c init.c draw.c line.c parse.c handle.c)
 OBJ			= $(SRC:.c=.o)
 NAME 			= fdf
 NORM_BIN		= norminette
 NORM_FLAGS		= -RCheckForbiddenSourceHeader -RCheckDefine
 RM			= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}includes
+CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}includes -g
 CC			= gcc
 LIBFT_FLAGS		= -L${LIBFT_DIR} -lft
 BUFFER_SIZE		= 1024
