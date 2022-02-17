@@ -6,18 +6,12 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/16 17:52:02 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/17 13:30:58 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
-
-void	init_2d_point(t_2dpoint *point, int x, int y)
-{
-	point->x = x;
-	point->y = y;
-}
 
 void	init_3d_point(t_3dpoint *point, int x, int y, int z)
 {

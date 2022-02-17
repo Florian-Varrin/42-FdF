@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/17 09:44:57 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/17 13:34:15 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WINDOW_NAME "FdF"
 # define COLOR 0x00FF0000
 
-# define MSG_INVALID_FILE "Invalid file"
+# define MSG_INVALID_FILE "Invalid file\n"
 
 # ifdef __APPLE__
 #  define KEY_Q 12
@@ -43,6 +43,13 @@ typedef struct s_3dpoint {
 	int	z;
 } t_3dpoint;
 
+typedef struct s_boundaries {
+	int	max_x;
+	int	min_x;
+	int	max_y;
+	int	min_y;
+} t_boundaries;
+
 typedef struct s_window {
 	void		*mlx;
 	void		*win;
@@ -60,6 +67,7 @@ typedef struct s_image {
 // General
 void		exit_error(char *message);
 void		exit_program_gracefully(void);
+void		print_usage(void);
 
 // Init
 void		init_image(t_window *window, t_image *image);
@@ -73,7 +81,17 @@ void		draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image);
 
 // Parse
 void		parse_file(t_list_el **lst_3d_points, char *path);
-void		destroy_3dpoint(void *content);
+
+// Destroy
+void		destroy_point(void *content);
+
+// Projection
+t_list_el 	**project_3d_to_isometric(t_list_el **lst_3d_points, t_list_el **lst_2d_points);
+
+// Debug
+void		print_2d_point(void *point);
+void		print_3d_point(void *point);
+void		print_boundaries(t_boundaries *boundaries);
 
 // Handle
 int			handle_key(int keycode, void *window);

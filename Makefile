@@ -6,7 +6,7 @@
 #    By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 10:27:38 by fvarrin           #+#    #+#              #
-#    Updated: 2022/02/16 17:53:20 by fvarrin          ###   ########.fr        #
+#    Updated: 2022/02/17 13:34:29 by fvarrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ LIBFT_DIR		= ${ROOT_DIR}/libft/
 MLX_DIR			= ${ROOT_DIR}/minilibx-wrapper/
 
 # COMPILER
-SRC			= $(addprefix ${SRC_DIR}, main.c init.c draw.c line.c parse.c handle.c)
+SRC			= $(addprefix ${SRC_DIR}, main.c init.c draw.c line.c parse.c handle.c \
+				projection.c destroy.c debug.c utils.c)
 OBJ			= $(SRC:.c=.o)
 NAME 			= fdf
 NORM_BIN		= norminette

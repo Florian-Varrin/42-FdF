@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:05:56 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/17 09:46:05 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/17 13:30:20 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ t_list_el	**create_points_for_line(char *line, int y, t_list_el **lst_points)
 		i++;
 	}
 	return (lst_points);
-}
-
-void	destroy_3dpoint(void *content)
-{
-	free(content);
 }
 
 void	parse_file(t_list_el **lst_3d_points, char *path)
