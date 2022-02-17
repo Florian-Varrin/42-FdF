@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/16 17:58:50 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/17 09:44:57 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image);
 
 // Parse
 void		parse_file(t_list_el **lst_3d_points, char *path);
+void		destroy_3dpoint(void *content);
 
 // Handle
 int			handle_key(int keycode, void *window);

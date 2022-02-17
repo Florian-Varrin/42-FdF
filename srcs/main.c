@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/16 17:59:24 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/17 09:44:11 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ int	main(int argc, char **argv)
 	init_window(&window, &handle_key, &handle_mouse);
 	init_image(&window, &image);
 	mlx_loop(window.mlx);
+	ft_lstclear(&lst_points_3d, destroy_3dpoint);
 }

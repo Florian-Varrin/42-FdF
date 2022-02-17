@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:05:56 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/16 17:59:11 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/17 09:46:05 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ int	create_point(char *line_position, int x, int y, t_list_el **lst_points)
 	return (count);
 }
 
-void	create_points_for_line(char *line, int y, t_list_el **lst_points)
+t_list_el	**create_points_for_line(char *line, int y, t_list_el **lst_points)
 {
 	int			i;
 	int			x;
 
-	(void) lst_points;
 	i = 0;
 	x = 0;
 	while (line[i])
@@ -52,6 +51,12 @@ void	create_points_for_line(char *line, int y, t_list_el **lst_points)
 		}
 		i++;
 	}
+	return (lst_points);
+}
+
+void	destroy_3dpoint(void *content)
+{
+	free(content);
 }
 
 void	parse_file(t_list_el **lst_3d_points, char *path)
@@ -68,7 +73,9 @@ void	parse_file(t_list_el **lst_3d_points, char *path)
 	while (line)
 	{
 		create_points_for_line(line, line_num, lst_3d_points);
+		free(line);
 		line = ft_get_next_line(fd);
 		line_num++;
 	}
+	free(line);
 }
