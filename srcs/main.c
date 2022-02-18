@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/18 10:53:25 by                  ###   ########.fr       */
+/*   Updated: 2022/02/18 13:29:55 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ t_2dpoint	*parse(
 	return (points);
 }
 
-void	display(t_2dpoint *points_2d)
+void	display(t_2dpoint *points_2d, t_map *map)
 {
 	t_window	window;
 	t_image		image;
 
 	init_window(&window, &handle_key, &handle_mouse);
 	init_image(&window, &image);
-	(void) points_2d;
+	draw_map(&image, map, points_2d);
+	mlx_put_image_to_window(window.mlx, window.win, image.img, 0, 0);
 	mlx_loop(window.mlx);
 }
 
@@ -59,5 +60,6 @@ int	main(int argc, char **argv)
 
 	init_map(&map);
 	points_2d = parse(argc, argv, &camera, &map);
-	display(points_2d);
+	display(points_2d, &map);
+	free(points_2d);
 }

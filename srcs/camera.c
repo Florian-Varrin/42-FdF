@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:41:43 by                   #+#    #+#             */
-/*   Updated: 2022/02/18 10:26:21 by                  ###   ########.fr       */
+/*   Updated: 2022/02/18 16:13:08 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@ void	set_camera(t_boundaries *boundaries, t_camera *camera)
 	int		delta_x;
 	int		delta_y;
 
+	x = -1;
+	y = -1;
 	delta_x = ((WINDOW_WIDTH / 2) * 100) / 80;
 	delta_y = ((WINDOW_HEIGHT / 2) * 100) / 80;
-	x = delta_x / (boundaries->max_x - boundaries->min_x);
-	y = delta_y / (boundaries->max_y - boundaries->min_y);
-	if (x < y)
+	if (boundaries->max_x - boundaries->min_x != 0)
+		x = delta_x / (boundaries->max_x - boundaries->min_x);
+	if (boundaries->max_y - boundaries->min_y != 0)
+		y = delta_y / (boundaries->max_y - boundaries->min_y);
+	if (x != -1 && x < y)
 		camera->zoom = x / 2;
-	else
+	else if (y != -1)
 		camera->zoom = y / 2;
+	else
+		camera->zoom = 1;
 }

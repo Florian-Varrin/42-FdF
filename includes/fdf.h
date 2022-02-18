@@ -81,11 +81,13 @@ void		print_usage(void);
 void		init_image(t_window *window, t_image *image);
 void		init_window(t_window *window, int (*handle_key)(int, void *), int (*handle_mouse)(int, int, int, void *));
 void		init_3d_point(t_3dpoint *point, int x, int y, int z);
+void		init_2d_point(t_2dpoint *point, int x, int y);
 void		init_map(t_map *map);
 
 // Draw
 void		put_pixel_to_image(t_image *image, int x, int y, int color);
 void		draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image);
+void		draw_map(t_image *image, t_map *map, t_2dpoint *points);
 
 // Parse
 void		parse_file(t_list_el **lst_3d_points, char *path, t_map *map);

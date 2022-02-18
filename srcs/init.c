@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/18 10:37:34 by                  ###   ########.fr       */
+/*   Updated: 2022/02/18 13:05:40 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	init_3d_point(t_3dpoint *point, int x, int y, int z)
 	point->x = x;
 	point->y = y;
 	point->z = z;
+}
+
+void	init_2d_point(t_2dpoint *point, int x, int y)
+{
+	point->x = x;
+	point->y = y;
 }
 
 void	init_map(t_map *map)
