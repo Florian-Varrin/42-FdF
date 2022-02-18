@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/17 13:30:58 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/18 10:37:34 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	init_3d_point(t_3dpoint *point, int x, int y, int z)
 	point->x = x;
 	point->y = y;
 	point->z = z;
+}
+
+void	init_map(t_map *map)
+{
+	map->line_size = -1;
+	map->number_of_points = -1;
 }
 
 void	init_image(t_window *window, t_image *image)

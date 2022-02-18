@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/17 13:33:34 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/18 10:53:25 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,46 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void	parse(int argc, char **argv, t_list_el **lst_2d_points)
+t_2dpoint	*parse(
+		int argc,
+		char **argv,
+		t_camera *camera,
+		t_map *map
+	)
 {
-	t_list_el	*lst_3d_points;
+	t_list_el	*lst_3d;
+	t_list_el	*lst_2d;
+	t_2dpoint	*points;
 
-	lst_3d_points = NULL;
+	lst_3d = NULL;
+	lst_2d = NULL;
 	if (argc != 2)
 		print_usage();
-	parse_file(&lst_3d_points, argv[1]);
-	project_3d_to_isometric(&lst_3d_points, lst_2d_points);
-	ft_lstclear(&lst_3d_points, destroy_point);
+	parse_file(&lst_3d, argv[1], map);
+	points = project_3d_to_isometric(&lst_3d, &lst_2d, camera, map);
+	ft_lstclear(&lst_3d, destroy_point);
+	ft_lstclear(&lst_2d, destroy_point);
+	return (points);
 }
 
-void	display(void)
+void	display(t_2dpoint *points_2d)
 {
 	t_window	window;
 	t_image		image;
 
 	init_window(&window, &handle_key, &handle_mouse);
 	init_image(&window, &image);
+	(void) points_2d;
 	mlx_loop(window.mlx);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list_el	*lst_2d_points;
+	t_camera	camera;
+	t_map		map;
+	t_2dpoint	*points_2d;
 
-	lst_2d_points = NULL;
-	parse(argc, argv, &lst_2d_points);
-	ft_lstiter(lst_2d_points, print_2d_point);
-	display();
-	ft_lstclear(&lst_2d_points, destroy_point);
+	init_map(&map);
+	points_2d = parse(argc, argv, &camera, &map);
+	display(points_2d);
 }

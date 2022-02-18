@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:51:15 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/17 13:35:34 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/18 10:47:47 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,44 +33,62 @@ t_2dpoint	*create_2d_point(t_3dpoint *point_3d)
 	return (point_2d);
 }
 
-void	update_boundaries(
-			t_boundaries *boundaries,
-			t_2dpoint *point,
-			_Bool first_point
-		)
+void	move_2d_points(t_list_el **lst_2d_points)
 {
-	if (first_point || boundaries->max_x < point->x)
-		boundaries->max_x = point->x;
-	if (first_point || boundaries->min_x > point->x)
-		boundaries->min_x = point->x;
-	if (first_point || boundaries->max_y < point->y)
-		boundaries->max_y = point->y;
-	if (first_point || boundaries->min_y > point->y)
-		boundaries->min_y = point->y;
-}
-
-void	resize_2d_points(t_list_el **lst_2d_points)
-{
-	t_boundaries	boundaries;
 	t_list_el		*current_el;
+	t_boundaries	boundaries;
 
-	current_el = *lst_2d_points;
-	update_boundaries(&boundaries, current_el->content, true);
-	while (current_el)
-	{
-		update_boundaries(&boundaries, current_el->content, false);
-		current_el = current_el->next;
-	}
+	set_boundaries(&boundaries, lst_2d_points);
 	current_el = *lst_2d_points;
 	while (current_el)
 	{
+		((t_2dpoint *)current_el->content)->x += WINDOW_WIDTH / 2;
+		((t_2dpoint *)current_el->content)->y += WINDOW_HEIGHT / 2;
 		current_el = current_el->next;
 	}
 }
 
-t_list_el	**project_3d_to_isometric(
+void	resize_2d_points(t_list_el **lst_2d_points, t_camera *camera)
+{
+	t_list_el		*current_el;
+	t_boundaries	boundaries;
+
+	set_boundaries(&boundaries, lst_2d_points);
+	set_camera(&boundaries, camera);
+	current_el = *lst_2d_points;
+	while (current_el)
+	{
+		((t_2dpoint *)current_el->content)->x *= camera->zoom;
+		((t_2dpoint *)current_el->content)->y *= camera->zoom;
+		current_el = current_el->next;
+	}
+}
+
+t_2dpoint	*format_2d_points(t_list_el **lst_2d_points, t_map *map)
+{
+	int			i;
+	int			number_of_points;
+	t_2dpoint	*formated_points;
+	t_list_el	*current_el;
+
+	number_of_points = ft_lstsize(*lst_2d_points);
+	map->number_of_points = number_of_points;
+	formated_points = ft_calloc(number_of_points + 1, sizeof(t_2dpoint));
+	i = 0;
+	current_el = *lst_2d_points;
+	while (current_el)
+	{
+		formated_points[i] = *(t_2dpoint *)current_el->content;
+		current_el = current_el->next;
+	}
+	return (formated_points);
+}
+
+t_2dpoint	*project_3d_to_isometric(
 				t_list_el **lst_3d_points,
-				t_list_el **lst_2d_points
+				t_list_el **lst_2d_points,
+				t_camera *camera,
+				t_map *map
 			)
 {
 	t_2dpoint	*point_2d;
@@ -85,6 +103,7 @@ t_list_el	**project_3d_to_isometric(
 		ft_lstadd_back(lst_2d_points, ft_lstnew(point_2d));
 		current_el = current_el->next;
 	}
-	resize_2d_points(lst_2d_points);
-	return (lst_2d_points);
+	resize_2d_points(lst_2d_points, camera);
+	move_2d_points(lst_2d_points);
+	return (format_2d_points(lst_2d_points, map));
 }

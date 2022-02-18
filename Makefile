@@ -6,7 +6,7 @@
 #    By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 10:27:38 by fvarrin           #+#    #+#              #
-#    Updated: 2022/02/17 13:34:29 by fvarrin          ###   ########.fr        #
+#   Updated: 2022/02/17 17:41:59 by                  ###   ########.fr       # #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLX_DIR			= ${ROOT_DIR}/minilibx-wrapper/
 
 # COMPILER
 SRC			= $(addprefix ${SRC_DIR}, main.c init.c draw.c line.c parse.c handle.c \
-				projection.c destroy.c debug.c utils.c)
+				projection.c destroy.c debug.c utils.c camera.c boundaries.c)
 OBJ			= $(SRC:.c=.o)
 NAME 			= fdf
 NORM_BIN		= norminette
@@ -41,9 +41,9 @@ endif
 .PHONY: 	all clean fclean re
 
 ${NAME}:	${OBJ}
-		@make -C ${LIBFT_DIR} BUFFER_SIZE=${BUFFER_SIZE} all || true
-		@make -C ${MLX_DIR}
-		${CC} ${CFLAGS} ${OBJ} ${LIBFT_FLAGS} ${MLX_FLAGS} -o ${NAME}
+			@make -C ${LIBFT_DIR} BUFFER_SIZE=${BUFFER_SIZE} all || true
+			@make -C ${MLX_DIR}
+			${CC} ${CFLAGS} ${OBJ} ${LIBFT_FLAGS} ${MLX_FLAGS} -o ${NAME}
 
 all: 		${NAME}
 
