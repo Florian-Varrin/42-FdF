@@ -6,14 +6,26 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:41:43 by                   #+#    #+#             */
-/*   Updated: 2022/02/18 16:13:08 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 11:36:08 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-void	set_camera(t_boundaries *boundaries, t_camera *camera)
+#include <stdlib.h>
+
+t_camera	*init_camera(t_camera *camera, t_window *window)
+{
+	camera = (t_camera *)malloc(sizeof(t_camera));
+	camera->height = 100;
+	camera->zoom = -1;
+	camera->offset_x = WINDOW_WIDTH / 4;
+	camera->offset_y = WINDOW_HEIGHT / 4;
+	window->camera = camera;
+	return (camera);
+}
+void	set_camera_zoom(t_boundaries *boundaries, t_camera *camera)
 {
 	int		x;
 	int		y;
@@ -34,4 +46,5 @@ void	set_camera(t_boundaries *boundaries, t_camera *camera)
 		camera->zoom = y / 2;
 	else
 		camera->zoom = 1;
+	camera->zoom *= ZOOM_BASE;
 }

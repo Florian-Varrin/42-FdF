@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:33:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/17 13:36:15 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/02/26 11:51:31 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	exit_error(char *message)
 	exit(-1);
 }
 
-void	exit_program_gracefully(void)
+void	exit_program_gracefully(t_window *window)
 {
+	destroy(window, window->map, window->camera);
 	exit(0);
 }
