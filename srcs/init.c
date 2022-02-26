@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:17:25 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:46:25 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 
 #include <stdlib.h>
+#include <stdbool.h>
 
 void	init_3d_point(t_3dpoint *point, int x, int y, int z)
 {
@@ -68,5 +69,6 @@ t_window	*init_window(
 	mlx_mouse_hook(window->win, handle_mouse, window);
 	window->lst_3d_points = NULL;
 	window->map = NULL;
+	window->mover = init_mover();
 	return (window);
 }

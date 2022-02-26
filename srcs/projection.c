@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:51:15 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 11:37:54 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:56:25 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	move_2d_points(t_list_el **lst_2d_points, t_camera *camera)
 	current_el = *lst_2d_points;
 	while (current_el)
 	{
+		(void) camera;
 		((t_2dpoint *)current_el->content)->x += camera->offset_x;
 		((t_2dpoint *)current_el->content)->y += camera->offset_y;
 		current_el = current_el->next;

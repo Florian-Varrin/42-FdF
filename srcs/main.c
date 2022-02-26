@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:03:57 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:26:05 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ void	init(t_window **window, t_map **map, t_camera **camera)
 	*camera = init_camera(*camera, *window);
 }
 
-void	destroy(t_window *window, t_map *map, t_camera *camera)
-{
-	free(window->current_image);
-	free(window);
-	free(map);
-	free(camera);
-}
-
 int	main(int argc, char **argv)
 {
 	t_window	*window;
@@ -61,6 +53,5 @@ int	main(int argc, char **argv)
 	lst_3d = NULL;
 	parse(argv, map, lst_3d, window);
 	render_map(window);
-	ft_lstclear(&lst_3d, destroy_point);
-	destroy(window, map, camera);
+	destroy_state(window, map, camera);
 }

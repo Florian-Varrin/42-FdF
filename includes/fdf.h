@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:07:53 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:48:57 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft.h"
 
-# define WINDOW_WIDTH 700
-# define WINDOW_HEIGHT 700
+# define WINDOW_WIDTH 1400
+# define WINDOW_HEIGHT 1000
 # define WINDOW_NAME "FdF"
 # define ZOOM_BASE 100
 # define ZOOM_STEP 5
@@ -37,6 +37,7 @@
 #  define KEY_UP 65362
 #  define KEY_ESC 65307
 #  define KEY_DOWN 65364
+#  define MOUSE_CLICK 1
 #  define MOUSE_WHEEL_UP 4
 #  define MOUSE_WHEEL_DOWN 5
 # endif
@@ -71,6 +72,12 @@ typedef struct s_map {
 	int	line_size;
 }	t_map;
 
+typedef struct s_mover {
+	_Bool	is_moving;
+	t_2dpoint	*start;
+	t_2dpoint	*end;
+}	t_mover;
+
 typedef struct s_image {
 	void	*img;
 	char	*addr;
@@ -86,13 +93,14 @@ typedef struct s_window {
 	t_map		*map;
 	t_camera	*camera;
 	t_list_el	*lst_3d_points;
+	t_mover		*mover;
 }	t_window;
 
 // General
 void		exit_error(char *message);
 void		exit_program_gracefully(t_window *window);
 void		print_usage(void);
-void		destroy(t_window *window, t_map *map, t_camera *camera);
+void		destroy_state(t_window *window, t_map *map, t_camera *camera);
 
 // Init
 t_image		*init_image(t_window *window, t_image *image);
@@ -132,4 +140,8 @@ int			handle_mouse(int mouse, int x, int y, void *window);
 
 // Boundaries
 void		set_boundaries(t_boundaries *boundaries, t_list_el **lst_2d_points);
+
+// Mover
+t_mover		*init_mover();
+t_mover		*reset_mover(t_mover *current_mover);
 #endif
