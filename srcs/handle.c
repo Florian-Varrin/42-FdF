@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 17:50:28 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 11:51:46 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 11:51:55 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	handle_key(int keycode, void *window)
 
 int	handle_mouse(int mouse, int x, int y, void *config)
 {
-	t_window *window;
+	t_window	*window;
 
 	window = config;
 	(void) x;

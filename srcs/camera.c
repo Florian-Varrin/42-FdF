@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:41:43 by                   #+#    #+#             */
-/*   Updated: 2022/02/26 11:36:08 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 11:38:35 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_camera	*init_camera(t_camera *camera, t_window *window)
 	window->camera = camera;
 	return (camera);
 }
+
 void	set_camera_zoom(t_boundaries *boundaries, t_camera *camera)
 {
 	int		x;
