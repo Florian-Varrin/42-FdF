@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 11:17:23 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:17:25 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ t_map	*init_map(t_map *map, t_window *window)
 	return (map);
 }
 
-void	init_image(t_window *window, t_image *image)
+t_image	*init_image(t_window *window, t_image *image)
 {
+	image = (t_image *)malloc(sizeof(t_image));
 	image->img = mlx_new_image(window->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	image->addr = mlx_get_data_addr(
 			image->img,
@@ -46,7 +47,7 @@ void	init_image(t_window *window, t_image *image)
 			&(image->line_length),
 			&(image->endian)
 			);
-	window->image = image;
+	return (image);
 }
 
 t_window	*init_window(

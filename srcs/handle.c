@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 17:50:28 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 11:51:55 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:21:58 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	zoom_handler(int mouse, t_window *window)
 	return (0);
 }
 
-int	height_handle(int keycode, t_window *window)
+int	height_handler(int keycode, t_window *window)
 {
-	if (keycode == KEY_DOWN && window->camera->height > HEIGHT_STEP)
+	if (keycode == KEY_DOWN)
 		window->camera->height -= HEIGHT_STEP;
 	if (keycode == KEY_UP)
 		window->camera->height += HEIGHT_STEP;
@@ -41,7 +41,7 @@ int	handle_key(int keycode, void *window)
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		exit_program_gracefully(window);
 	if (keycode == KEY_UP || keycode == KEY_DOWN)
-		return (height_handle(keycode, window));
+		return (height_handler(keycode, window));
 	return (0);
 }
 

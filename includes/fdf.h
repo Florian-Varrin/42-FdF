@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 11:51:05 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:07:53 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_image {
 typedef struct s_window {
 	void		*mlx;
 	void		*win;
-	t_image		*image;
+	t_image		*current_image;
 	t_map		*map;
 	t_camera	*camera;
 	t_list_el	*lst_3d_points;
@@ -95,7 +95,7 @@ void		print_usage(void);
 void		destroy(t_window *window, t_map *map, t_camera *camera);
 
 // Init
-void		init_image(t_window *window, t_image *image);
+t_image		*init_image(t_window *window, t_image *image);
 t_window	*init_window(t_window *window, int (*handle_key)(int, void *), int (*handle_mouse)(int, int, int, void *));
 void		init_3d_point(t_3dpoint *point, int x, int y, int z);
 void		init_2d_point(t_2dpoint *point, int x, int y);

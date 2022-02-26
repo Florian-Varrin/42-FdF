@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 11:17:03 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:03:57 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init(t_window **window, t_map **map, t_camera **camera)
 
 void	destroy(t_window *window, t_map *map, t_camera *camera)
 {
+	free(window->current_image);
 	free(window);
 	free(map);
 	free(camera);

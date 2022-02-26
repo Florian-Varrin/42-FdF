@@ -6,12 +6,14 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:14:02 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 10:44:48 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 13:17:58 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
+
+#include <stdlib.h>
 
 void	put_pixel_to_image(t_image *image, int x, int y, int color)
 {
@@ -22,6 +24,20 @@ void	put_pixel_to_image(t_image *image, int x, int y, int color)
 		dst = image->addr
 			+ (y * image->line_length + x * (image->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
+	}
+}
+
+void	put_image_to_window(t_window *window, t_image *image)
+{
+	t_image		*old_image;
+
+	old_image = window->current_image;
+	window->current_image = image;
+	mlx_put_image_to_window(window->mlx, window->win, image->img, 0, 0);
+	if (old_image)
+	{
+		mlx_destroy_image(window->mlx, old_image->img);
+		free(old_image);
 	}
 }
 
@@ -50,14 +66,15 @@ void	render_map(t_window *window)
 	t_2dpoint	*points_2d;
 	t_camera	*camera;
 	t_map		*map;
-	t_image		image;
+	t_image		*image;
 
+	image = NULL;
 	camera = window->camera;
 	lst_3d = window->lst_3d_points;
 	map = window->map;
 	points_2d = project_3d_to_isometric(&lst_3d, camera, map);
-	init_image(window, &image);
-	draw_map(&image, map, points_2d);
-	mlx_put_image_to_window(window->mlx, window->win, image.img, 0, 0);
+	image = init_image(window, image);
+	draw_map(image, map, points_2d);
+	put_image_to_window(window, image);
 	mlx_loop(window->mlx);
 }
