@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:14:02 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:17:58 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 16:40:44 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	render_map(t_window *window)
 	camera = window->camera;
 	lst_3d = window->lst_3d_points;
 	map = window->map;
-	points_2d = project_3d_to_isometric(&lst_3d, camera, map, window->roter);
+	points_2d = project_3d_to_isometric(&lst_3d, camera, map);
 	image = init_image(window, image);
 	draw_map(image, map, points_2d);
 	put_image_to_window(window, image);

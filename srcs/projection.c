@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:51:15 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 14:51:11 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 16:28:33 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@
 #include <math.h>
 #include <stdlib.h>
 
-t_2dpoint	*create_2d_point(t_3dpoint *point_3d, t_camera *camera, t_roter *roter)
+t_2dpoint	*create_2d_point(t_3dpoint *point_3d, t_camera *camera)
 {
 	t_2dpoint	*point_2d;
+	t_3dpoint	*projected_3d_point;
 
+	projected_3d_point = malloc(sizeof(t_3dpoint));
+	init_3d_point(projected_3d_point, point_3d->x, point_3d->y, point_3d->z);
 	point_2d = malloc(sizeof(t_2dpoint));
-	point_3d->z = (point_3d->z * camera->height) / 100;
-	point_3d = rotate_x_axis(point_3d, roter->x_angle);
-	point_3d = rotate_y_axis(point_3d, roter->y_angle);
-	do_projection(point_3d, point_2d);
+	projected_3d_point->z = (projected_3d_point->z * camera->height) / 100;
+	projected_3d_point = rotate_x_axis(projected_3d_point, camera->angle_x);
+	projected_3d_point = rotate_y_axis(projected_3d_point, camera->angle_y);
+	do_projection(projected_3d_point, point_2d);
+	free(projected_3d_point);
 	return (point_2d);
 }
 
@@ -87,8 +91,7 @@ t_2dpoint	*format_2d_points(t_list_el **lst_2d_points, t_map *map)
 t_2dpoint	*project_3d_to_isometric(
 				t_list_el **lst_3d_points,
 				t_camera *camera,
-				t_map *map,
-				t_roter *roter
+				t_map *map
 			)
 {
 	t_2dpoint	*point_2d;
@@ -100,7 +103,7 @@ t_2dpoint	*project_3d_to_isometric(
 	current_el = *lst_3d_points;
 	while (current_el)
 	{
-		point_2d = create_2d_point(current_el->content, camera, roter);
+		point_2d = create_2d_point(current_el->content, camera);
 		ft_lstadd_back(&lst_2d_points, ft_lstnew(point_2d));
 		current_el = current_el->next;
 	}

@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:41:43 by                   #+#    #+#             */
-/*   Updated: 2022/02/26 11:38:35 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 15:42:09 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_camera	*init_camera(t_camera *camera, t_window *window)
 	camera->zoom = -1;
 	camera->offset_x = WINDOW_WIDTH / 4;
 	camera->offset_y = WINDOW_HEIGHT / 4;
+	camera->angle_x = X_BASE_ANGLE;
+	camera->angle_y = Y_BASE_ANGLE;
 	window->camera = camera;
 	return (camera);
 }

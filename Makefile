@@ -19,8 +19,7 @@ MLX_DIR				= ${ROOT_DIR}/minilibx-wrapper/
 
 # COMPILER
 SRC					= $(addprefix ${SRC_DIR}, main.c init.c draw.c line.c parse.c handle.c \
-					projection.c destroy.c debug.c utils.c camera.c boundaries.c mover.c \
-					matrices.c roter.c)
+					projection.c destroy.c debug.c utils.c camera.c boundaries.c matrices.c)
 OBJ					= $(SRC:.c=.o)
 NAME 				= fdf
 NORM_BIN			= norminette

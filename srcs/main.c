@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 14:14:03 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 15:39:32 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	parse(
 
 void	init_state(t_window **window, t_map **map, t_camera **camera)
 {
-	*window = init_window(*window, &handle_key, &handle_mouse);
+	*window = init_window(*window, &handle_key);
 	*map = init_map(*map, *window);
 	*camera = init_camera(*camera, *window);
 }
