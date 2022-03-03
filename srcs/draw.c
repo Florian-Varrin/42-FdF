@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:14:02 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 16:40:44 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 17:07:12 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	put_image_to_window(t_window *window, t_image *image)
 	old_image = window->current_image;
 	window->current_image = image;
 	mlx_put_image_to_window(window->mlx, window->win, image->img, 0, 0);
-	if (old_image)
+	if (old_image != NULL)
 	{
 		mlx_destroy_image(window->mlx, old_image->img);
 		free(old_image);

@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 16:52:09 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 16:57:09 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ t_window	*init_window(
 	mlx_key_hook(window->win, handle_key, window);
 	window->lst_3d_points = NULL;
 	window->map = NULL;
+	window->current_image = NULL;
 	return (window);
 }
