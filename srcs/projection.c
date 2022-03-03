@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:51:15 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:56:25 by                  ###   ########.fr       */
+/*   Updated: 2022/02/27 17:06:56 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,17 @@
 #include "libft.h"
 
 #include <math.h>
-#include <stdbool.h>
 #include <stdlib.h>
 
 t_2dpoint	*create_2d_point(t_3dpoint *point_3d, t_camera *camera)
 {
-	int			x;
-	int			y;
-	int			z;
 	t_2dpoint	*point_2d;
 
 	point_2d = malloc(sizeof(t_2dpoint));
-	x = point_3d->x;
-	y = point_3d->y;
-	z = (point_3d->z * camera->height) / 100;
-	point_2d->x = (int)((x - z) / sqrt(2));
-	point_2d->y = (int)((x + (2 * y) + z) / sqrt(6));
+	point_3d->z = (point_3d->z * camera->height) / 100;
+	point_3d = rotate_x_axis(point_3d);
+	point_3d = rotate_y_axis(point_3d);
+	do_projection(point_3d, point_2d);
 	return (point_2d);
 }
 

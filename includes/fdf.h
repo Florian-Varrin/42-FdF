@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:48:57 by                  ###   ########.fr       */
+/*   Updated: 2022/02/26 16:11:30 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ typedef struct s_3dpoint {
 	int	y;
 	int	z;
 }	t_3dpoint;
+
+typedef struct s_matrix {
+	int	rows;
+	int	columns;
+	int *matrix;
+}	t_matrix;
 
 typedef struct s_boundaries {
 	int	max_x;
@@ -144,4 +150,9 @@ void		set_boundaries(t_boundaries *boundaries, t_list_el **lst_2d_points);
 // Mover
 t_mover		*init_mover();
 t_mover		*reset_mover(t_mover *current_mover);
+
+// Matrices
+t_3dpoint	*rotate_x_axis(t_3dpoint *point);
+t_3dpoint	*rotate_y_axis(t_3dpoint *point);
+void		do_projection(t_3dpoint *point_3d, t_2dpoint *point_2d);
 #endif
