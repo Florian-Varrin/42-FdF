@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:51:15 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/27 17:06:56 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 14:51:11 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <math.h>
 #include <stdlib.h>
 
-t_2dpoint	*create_2d_point(t_3dpoint *point_3d, t_camera *camera)
+t_2dpoint	*create_2d_point(t_3dpoint *point_3d, t_camera *camera, t_roter *roter)
 {
 	t_2dpoint	*point_2d;
 
 	point_2d = malloc(sizeof(t_2dpoint));
 	point_3d->z = (point_3d->z * camera->height) / 100;
-	point_3d = rotate_x_axis(point_3d);
-	point_3d = rotate_y_axis(point_3d);
+	point_3d = rotate_x_axis(point_3d, roter->x_angle);
+	point_3d = rotate_y_axis(point_3d, roter->y_angle);
 	do_projection(point_3d, point_2d);
 	return (point_2d);
 }
@@ -37,7 +37,6 @@ void	move_2d_points(t_list_el **lst_2d_points, t_camera *camera)
 	current_el = *lst_2d_points;
 	while (current_el)
 	{
-		(void) camera;
 		((t_2dpoint *)current_el->content)->x += camera->offset_x;
 		((t_2dpoint *)current_el->content)->y += camera->offset_y;
 		current_el = current_el->next;
@@ -88,7 +87,8 @@ t_2dpoint	*format_2d_points(t_list_el **lst_2d_points, t_map *map)
 t_2dpoint	*project_3d_to_isometric(
 				t_list_el **lst_3d_points,
 				t_camera *camera,
-				t_map *map
+				t_map *map,
+				t_roter *roter
 			)
 {
 	t_2dpoint	*point_2d;
@@ -100,7 +100,7 @@ t_2dpoint	*project_3d_to_isometric(
 	current_el = *lst_3d_points;
 	while (current_el)
 	{
-		point_2d = create_2d_point(current_el->content, camera);
+		point_2d = create_2d_point(current_el->content, camera, roter);
 		ft_lstadd_back(&lst_2d_points, ft_lstnew(point_2d));
 		current_el = current_el->next;
 	}

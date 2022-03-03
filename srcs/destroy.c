@@ -26,6 +26,8 @@ void	destroy_state(t_window *window, t_map *map, t_camera *camera)
 	mlx_destroy_window(window->mlx, window->win);
 	ft_lstclear(&(window->lst_3d_points), destroy_point);
 	free(window->current_image);
+	free(window->mover);
+	free(window->roter);
 	free(window);
 	free(map);
 	free(camera);

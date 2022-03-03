@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 16:11:30 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 14:49:47 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define HEIGHT_BASE 100
 # define HEIGHT_STEP 10
 # define COLOR 0x00FF0000
+# define X_BASE_ANGLE 45
+# define Y_BASE_ANGLE 35
 
 # define MSG_INVALID_FILE "Invalid file\n"
 
@@ -43,14 +45,14 @@
 # endif
 
 typedef struct s_2dpoint {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_2dpoint;
 
 typedef struct s_3dpoint {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_3dpoint;
 
 typedef struct s_matrix {
@@ -84,6 +86,11 @@ typedef struct s_mover {
 	t_2dpoint	*end;
 }	t_mover;
 
+typedef struct s_roter {
+	double	x_angle;
+	double	y_angle;
+}	t_roter;
+
 typedef struct s_image {
 	void	*img;
 	char	*addr;
@@ -100,6 +107,7 @@ typedef struct s_window {
 	t_camera	*camera;
 	t_list_el	*lst_3d_points;
 	t_mover		*mover;
+	t_roter		*roter;
 }	t_window;
 
 // General
@@ -111,8 +119,8 @@ void		destroy_state(t_window *window, t_map *map, t_camera *camera);
 // Init
 t_image		*init_image(t_window *window, t_image *image);
 t_window	*init_window(t_window *window, int (*handle_key)(int, void *), int (*handle_mouse)(int, int, int, void *));
-void		init_3d_point(t_3dpoint *point, int x, int y, int z);
-void		init_2d_point(t_2dpoint *point, int x, int y);
+void		init_3d_point(t_3dpoint *point, double x, double y, double z);
+void		init_2d_point(t_2dpoint *point, double x, double y);
 t_map		*init_map(t_map *map, t_window *window);
 
 // Draw
@@ -128,7 +136,7 @@ void		parse_file(t_list_el **lst_3d_points, char *path, t_map *map);
 void		destroy_point(void *content);
 
 // Projection
-t_2dpoint	*project_3d_to_isometric(t_list_el **lst_3d_points, t_camera *camera, t_map *map);
+t_2dpoint	*project_3d_to_isometric(t_list_el **lst_3d_points, t_camera *camera, t_map *map, t_roter *roter);
 
 // Camera
 t_camera	*init_camera(t_camera *camera, t_window *window);
@@ -137,8 +145,10 @@ void		set_camera_zoom(t_boundaries *boundaries, t_camera *camera);
 // Debug
 void		print_2d_point(void *point);
 void		print_3d_point(void *point);
+void		print_3d_points(t_list_el **lst);
 void		print_boundaries(t_boundaries *boundaries);
 void		print_map(t_map *map);
+void		print_matrix(double matrix[3][3], char *message);
 
 // Handle
 int			handle_key(int keycode, void *window);
@@ -151,8 +161,12 @@ void		set_boundaries(t_boundaries *boundaries, t_list_el **lst_2d_points);
 t_mover		*init_mover();
 t_mover		*reset_mover(t_mover *current_mover);
 
+// Roter
+t_roter		*init_roter();
+t_roter		*reset_roter(t_roter *current_roter);
+
 // Matrices
-t_3dpoint	*rotate_x_axis(t_3dpoint *point);
-t_3dpoint	*rotate_y_axis(t_3dpoint *point);
+t_3dpoint	*rotate_x_axis(t_3dpoint *point, double angle);
+t_3dpoint	*rotate_y_axis(t_3dpoint *point, double angle);
 void		do_projection(t_3dpoint *point_3d, t_2dpoint *point_2d);
 #endif

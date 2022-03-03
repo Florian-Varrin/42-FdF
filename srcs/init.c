@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_state.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:46:25 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 14:47:47 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void	init_3d_point(t_3dpoint *point, int x, int y, int z)
+void	init_3d_point(t_3dpoint *point, double x, double y, double z)
 {
 	point->x = x;
 	point->y = y;
 	point->z = z;
 }
 
-void	init_2d_point(t_2dpoint *point, int x, int y)
+void	init_2d_point(t_2dpoint *point, double x, double y)
 {
 	point->x = x;
 	point->y = y;
@@ -70,5 +70,6 @@ t_window	*init_window(
 	window->lst_3d_points = NULL;
 	window->map = NULL;
 	window->mover = init_mover();
+	window->roter = init_roter();
 	return (window);
 }

@@ -72,7 +72,7 @@ void	render_map(t_window *window)
 	camera = window->camera;
 	lst_3d = window->lst_3d_points;
 	map = window->map;
-	points_2d = project_3d_to_isometric(&lst_3d, camera, map);
+	points_2d = project_3d_to_isometric(&lst_3d, camera, map, window->roter);
 	image = init_image(window, image);
 	draw_map(image, map, points_2d);
 	put_image_to_window(window, image);

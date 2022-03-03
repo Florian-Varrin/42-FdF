@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 15:29:11 by                   #+#    #+#             */
-/*   Updated: 2022/02/27 17:03:17 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 14:42:56 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ t_3dpoint	*do_matrix_multiplication(t_3dpoint *point, double matrix[3][3])
 	x = point->x;
 	y = point->y;
 	z = point->z;
-	x = (x * matrix[0][0]) + (x * matrix[1][0]) + (x * matrix[2][0]);
-	y = (y * matrix[0][1]) + (y * matrix[1][1]) + (y * matrix[2][1]);
-	z = (z * matrix[0][2]) + (z * matrix[1][2]) + (z * matrix[2][2]);
-	init_3d_point(point, (int)x, (int)y, (int)z);
+	point->x = (x * matrix[0][0]) + (y * matrix[1][0]) + (z * matrix[2][0]);
+	point->y = (x * matrix[0][1]) + (y * matrix[1][1]) + (z * matrix[2][1]);
+	point->z = (x * matrix[0][2]) + (y * matrix[1][2]) + (z * matrix[2][2]);
 	return (point);
 }
 
-t_3dpoint	*rotate_x_axis(t_3dpoint *point)
+t_3dpoint	*rotate_x_axis(t_3dpoint *point, double angle)
 {
 	double	matrix[3][3];
 
@@ -39,27 +38,27 @@ t_3dpoint	*rotate_x_axis(t_3dpoint *point)
 	matrix[0][1] = 0;
 	matrix[0][2] = 0;
 	matrix[1][0] = 0;
-	matrix[1][1] = cos(35.264);
-	matrix[1][2] = sin(35.264);
+	matrix[1][1] = cos(angle);
+	matrix[1][2] = sin(angle);
 	matrix[2][0] = 0;
-	matrix[2][1] = -sin(35.264);
-	matrix[2][2] = cos(35.264);
+	matrix[2][1] = -sin(angle);
+	matrix[2][2] = cos(angle);
 	return (do_matrix_multiplication(point, matrix));
 }
 
-t_3dpoint	*rotate_y_axis(t_3dpoint *point)
+t_3dpoint	*rotate_y_axis(t_3dpoint *point, double angle)
 {
 	double	matrix[3][3];
 
-	matrix[0][0] = cos(45);
+	matrix[0][0] = cos(angle);
 	matrix[0][1] = 0;
-	matrix[0][2] = -sin(45);
+	matrix[0][2] = -sin(angle);
 	matrix[1][0] = 0;
 	matrix[1][1] = 1;
 	matrix[1][2] = 0;
-	matrix[2][0] = sin(45);
+	matrix[2][0] = sin(angle);
 	matrix[2][1] = 0;
-	matrix[2][2] = cos(45);
+	matrix[2][2] = cos(angle);
 	return (do_matrix_multiplication(point, matrix));
 }
 

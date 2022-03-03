@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:52:17 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/26 13:26:05 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 14:14:03 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	parse(
 	window->lst_3d_points = lst_3d;
 }
 
-void	init(t_window **window, t_map **map, t_camera **camera)
+void	init_state(t_window **window, t_map **map, t_camera **camera)
 {
 	*window = init_window(*window, &handle_key, &handle_mouse);
 	*map = init_map(*map, *window);
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	window = NULL;
 	map = NULL;
 	camera = NULL;
-	init(&window, &map, &camera);
+	init_state(&window, &map, &camera);
 	lst_3d = NULL;
 	parse(argv, map, lst_3d, window);
 	render_map(window);

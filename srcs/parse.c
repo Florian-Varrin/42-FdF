@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:05:56 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/18 10:38:49 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 14:10:33 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	create_point(char *line_position, int x, int y, t_list_el **lst_points)
 	digit = ft_substr(line_position, 0, count + 1);
 	z = ft_atoi(digit);
 	free(digit);
-	init_3d_point(point, x, y, z);
+	init_3d_point(point, (double)x, (double)y, (double)z);
 	ft_lstadd_back(lst_points, ft_lstnew((void *)point));
 	return (count);
 }
