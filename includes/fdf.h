@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 16:09:29 by                  ###   ########.fr       */
+/*   Updated: 2022/03/03 17:35:05 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_3dpoint {
 typedef struct s_matrix {
 	int	rows;
 	int	columns;
-	int *matrix;
+	int	*matrix;
 }	t_matrix;
 
 typedef struct s_boundaries {
@@ -78,10 +78,10 @@ typedef struct s_boundaries {
 }	t_boundaries;
 
 typedef struct s_camera {
-	int	zoom;
-	int	height;
-	int	offset_x;
-	int	offset_y;
+	int		zoom;
+	int		height;
+	int		offset_x;
+	int		offset_y;
 	double	angle_x;
 	double	angle_y;
 }	t_camera;
@@ -134,7 +134,11 @@ void		parse_file(t_list_el **lst_3d_points, char *path, t_map *map);
 void		destroy_point(void *content);
 
 // Projection
-t_2dpoint	*project_3d_to_isometric(t_list_el **lst_3d_points, t_camera *camera, t_map *map);
+t_2dpoint	*project_3d_to_isometric(
+				t_list_el **lst_3d_points,
+				t_camera *camera,
+				t_map *map
+				);
 
 // Camera
 t_camera	*init_camera(t_camera *camera, t_window *window);
