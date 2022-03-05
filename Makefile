@@ -6,7 +6,7 @@
 #    By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 10:27:38 by fvarrin           #+#    #+#              #
-#   Updated: 2022/03/05 11:59:22 by                  ###   ########.fr       # #
+#   Updated: 2022/03/05 13:46:35 by                  ###   ########.fr       # #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME 				= fdf
 NORM_BIN			= norminette
 NORM_FLAGS			= -RCheckForbiddenSourceHeader -RCheckDefine
 RM					= rm -f
-CFLAGS				= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}includes -g
+CFLAGS				= -Wall -Wextra -Werror -I${HEADER_DIR} -I${LIBFT_DIR}includes -I${MLX_DIR}includes
 CC					= gcc
 LIBFT_FLAGS			= -L${LIBFT_DIR} -lft
 BUFFER_SIZE			= 1024
