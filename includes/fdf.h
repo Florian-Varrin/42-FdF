@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/05 12:21:35 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 12:35:14 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,4 +175,11 @@ void		set_boundaries(
 t_3dpoint	*rotate_x_axis(t_3dpoint *point, double angle);
 t_3dpoint	*rotate_y_axis(t_3dpoint *point, double angle);
 void		do_projection(t_3dpoint *point_3d, t_2dpoint *point_2d);
+
+// Handle
+int			zoom_handler(int keycode, t_window *window);
+int			height_handler(int keycode, t_window *window);
+int			move_handler(int keycode, t_window *window);
+int			rotate_handler(int keycode, t_window *window);
+int			color_handler(t_window *window);
 #endif
