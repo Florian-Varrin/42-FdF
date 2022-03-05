@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:14:02 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/05 11:47:28 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 11:53:24 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	draw_map(t_image *image, t_map *map, t_2dpoint *points)
 	while (i < map->number_of_points)
 	{
 		if (i % map->line_size != 0)
-			draw_line(&(points[i]), &(points[i - 1]), image);
+			draw_line(&(points[i]), &(points[i - 1]), image, map->colors);
 		if (i >= map->line_size)
 		{
 			upper_point = (i - map->line_size);
-			draw_line(&points[i], &points[upper_point], image);
+			draw_line(&points[i], &points[upper_point], image, map->colors);
 		}
 		i++;
 	}

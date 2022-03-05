@@ -6,14 +6,14 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:41:59 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/02/18 13:54:32 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 12:12:08 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-void	draw_linex(t_2dpoint *start, t_2dpoint *end, t_image *image)
+void	draw_linex(t_2dpoint *start, t_2dpoint *end, t_image *image, int color)
 {
 	int		x;
 	int		y;
@@ -29,12 +29,12 @@ void	draw_linex(t_2dpoint *start, t_2dpoint *end, t_image *image)
 	while (ft_abs(x) < ft_abs(end->x - start->x))
 	{
 		y = (int)(m * x) + start->y;
-		put_pixel_to_image(image, x + start->x, y, COLOR);
+		put_pixel_to_image(image, x + start->x, y, color);
 		x += dif;
 	}
 }
 
-void	draw_liney(t_2dpoint *start, t_2dpoint *end, t_image *image)
+void	draw_liney(t_2dpoint *start, t_2dpoint *end, t_image *image, int color)
 {
 	int		x;
 	int		y;
@@ -49,16 +49,23 @@ void	draw_liney(t_2dpoint *start, t_2dpoint *end, t_image *image)
 	while (ft_abs(y) < ft_abs(end->y - start->y))
 	{
 		x = (int)(m * y) + start->x;
-		put_pixel_to_image(image, x, y + start->y, COLOR);
+		put_pixel_to_image(image, x, y + start->y, color);
 		y += dif;
 	}
 }
 
-void	draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image)
+void	draw_line(
+		t_2dpoint *start,
+		t_2dpoint *end,
+		t_image *image,
+		t_colors *colors
+	)
 {
+	int		color;
 	int		xdif;
 	int		ydif;
 
+	color = colors->available_colors[colors->current_color_index];
 	if ((start->x < 0 && end->x < 0) || (start->y < 0 && end->y < 0)
 		|| (start->x > WINDOW_WIDTH && end->x > WINDOW_WIDTH)
 		|| (start->y > WINDOW_HEIGHT && end->y > WINDOW_HEIGHT))
@@ -66,7 +73,7 @@ void	draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image)
 	xdif = ft_abs(end->x - start->x);
 	ydif = ft_abs(end->y - start->y);
 	if (xdif && xdif > ydif)
-		draw_linex(start, end, image);
+		draw_linex(start, end, image, color);
 	else if (ydif)
-		draw_liney(start, end, image);
+		draw_liney(start, end, image, color);
 }

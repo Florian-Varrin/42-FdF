@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/05 11:55:35 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 12:21:35 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@
 # define HEIGHT_STEP 10
 # define MOVE_STEP 25
 # define ANGLE_STEP 0.1
-# define COLOR 0x00FF0000
 # define X_BASE_ANGLE 51
 # define Y_BASE_ANGLE 31
+
+# define NUMBER_OF_COLORS 5
+# define COLOR_0 0x00FFFFFF;
+# define COLOR_1 0x00e06060;
+# define COLOR_2 0x008ab4f8;
+# define COLOR_3 0x0082c682;
+# define COLOR_4 0x00e2e286;
 
 # define MSG_INVALID_FILE "Invalid file\n"
 
@@ -38,6 +44,7 @@
 #  define KEY_Q 113
 #  define KEY_P 112
 #  define KEY_N 110
+#  define KEY_C 99
 #  define KEY_ESC 65307
 #  define KEY_UP 65362
 #  define KEY_DOWN 65364
@@ -86,9 +93,16 @@ typedef struct s_camera {
 	double	angle_y;
 }	t_camera;
 
+typedef struct s_colors {
+	int	*available_colors;
+	int	number_of_colors;
+	int	current_color_index;
+}	t_colors;
+
 typedef struct s_map {
-	int	number_of_points;
-	int	line_size;
+	int			number_of_points;
+	int			line_size;
+	t_colors	*colors;
 }	t_map;
 
 typedef struct s_image {
@@ -119,12 +133,15 @@ void		destroy_state(t_window *window, t_map *map, t_camera *camera);
 t_image		*init_image(t_window *window, t_image *image);
 t_window	*init_window(t_window *window, int (*handle_key)(int, void *));
 void		init_3d_point(t_3dpoint *point, double x, double y, double z);
-void		init_2d_point(t_2dpoint *point, double x, double y);
 t_map		*init_map(t_map *map, t_window *window);
 
 // Draw
 void		put_pixel_to_image(t_image *image, int x, int y, int color);
-void		draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image);
+void		draw_line(
+				t_2dpoint *start,
+				t_2dpoint *end,
+				t_image *image,
+				t_colors *colors);
 void		draw_map(t_image *image, t_map *map, t_2dpoint *points);
 void		render_map(t_window *window);
 void		prepare_map(t_window *window);
@@ -139,20 +156,11 @@ void		destroy_point(void *content);
 t_2dpoint	*project_3d_to_isometric(
 				t_list_el **lst_3d_points,
 				t_2dpoint *arr_2d_points,
-				t_window *window
-				);
+				t_window *window);
 
 // Camera
 t_camera	*init_camera(t_camera *camera, t_window *window);
 void		set_camera_zoom(t_boundaries *boundaries, t_camera *camera);
-
-// Debug
-void		print_2d_point(void *point);
-void		print_3d_point(void *point);
-void		print_3d_points(t_list_el **lst);
-void		print_boundaries(t_boundaries *boundaries);
-void		print_map(t_map *map);
-void		print_matrix(double matrix[3][3], char *message);
 
 // Handle
 int			handle_key(int keycode, void *window);
@@ -161,8 +169,7 @@ int			handle_key(int keycode, void *window);
 void		set_boundaries(
 				t_boundaries *boundaries,
 				t_window *window,
-				t_2dpoint *arr_2d_points
-				);
+				t_2dpoint *arr_2d_points);
 
 // Matrices
 t_3dpoint	*rotate_x_axis(t_3dpoint *point, double angle);

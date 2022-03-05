@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 17:50:28 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 16:12:43 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 12:19:43 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	height_handler(int keycode, t_window *window)
 	return (0);
 }
 
-int	handle_move(int keycode, t_window *window)
+int	move_handler(int keycode, t_window *window)
 {
 	if (keycode == KEY_DOWN)
 		window->camera->offset_y += MOVE_STEP;
@@ -51,7 +51,7 @@ int	handle_move(int keycode, t_window *window)
 	return (0);
 }
 
-int	handle_rotate(int keycode, t_window *window)
+int	rotate_handler(int keycode, t_window *window)
 {
 	if (keycode == KEY_NUMPAD_DOWN)
 		window->camera->angle_x -= ANGLE_STEP;
@@ -61,6 +61,20 @@ int	handle_rotate(int keycode, t_window *window)
 		window->camera->angle_y -= ANGLE_STEP;
 	else if (keycode == KEY_NUMPAD_RIGHT)
 		window->camera->angle_y += ANGLE_STEP;
+	render_map(window);
+	return (0);
+}
+
+int	color_handler(t_window *window)
+{
+	t_colors	*colors;
+	int			next_index;
+
+	colors = window->map->colors;
+	next_index = colors->current_color_index + 1;
+	if (next_index == colors->number_of_colors - 1)
+		next_index = 0;
+	colors->current_color_index = next_index;
 	render_map(window);
 	return (0);
 }
@@ -78,11 +92,13 @@ int	handle_key(int keycode, void *config)
 		return (height_handler(keycode, window));
 	if (keycode == KEY_UP || keycode == KEY_DOWN
 		|| keycode == KEY_LEFT || keycode == KEY_RIGHT)
-		return (handle_move(keycode, window));
+		return (move_handler(keycode, window));
 	if (keycode == KEY_NUMPAD_UP || keycode == KEY_NUMPAD_DOWN
 		|| keycode == KEY_NUMPAD_LEFT || keycode == KEY_NUMPAD_RIGHT)
-		return (handle_rotate(keycode, window));
+		return (rotate_handler(keycode, window));
 	if (keycode == KEY_PLUS || keycode == KEY_MINUS)
 		return (zoom_handler(keycode, window));
+	if (keycode == KEY_C)
+		return (color_handler(window));
 	return (0);
 }

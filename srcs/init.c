@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:21:20 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 16:57:09 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 12:09:59 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,18 @@ void	init_3d_point(t_3dpoint *point, double x, double y, double z)
 	point->z = z;
 }
 
-void	init_2d_point(t_2dpoint *point, double x, double y)
+t_colors	*init_colors(t_colors *colors)
 {
-	point->x = x;
-	point->y = y;
+	colors = (t_colors *)malloc(sizeof(t_colors));
+	colors->number_of_colors = NUMBER_OF_COLORS;
+	colors->current_color_index = 0;
+	colors->available_colors = (int *)malloc(sizeof(int) * NUMBER_OF_COLORS);
+	colors->available_colors[0] = COLOR_0;
+	colors->available_colors[1] = COLOR_1;
+	colors->available_colors[2] = COLOR_2;
+	colors->available_colors[3] = COLOR_3;
+	colors->available_colors[4] = COLOR_4;
+	return (colors);
 }
 
 t_map	*init_map(t_map *map, t_window *window)
@@ -34,6 +42,7 @@ t_map	*init_map(t_map *map, t_window *window)
 	map->line_size = -1;
 	map->number_of_points = -1;
 	window->map = map;
+	map->colors = init_colors(map->colors);
 	return (map);
 }
 

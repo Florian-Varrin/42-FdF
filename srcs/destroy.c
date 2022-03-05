@@ -28,6 +28,8 @@ void	destroy_state(t_window *window, t_map *map, t_camera *camera)
 	ft_lstclear(&(window->lst_3d_points), destroy_point);
 	free(window->current_image);
 	free(window);
+	free(map->colors->available_colors);
+	free(map->colors);
 	free(map);
 	free(camera);
 }
