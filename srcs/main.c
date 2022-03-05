@@ -52,6 +52,7 @@ int	main(int argc, char **argv)
 	init_state(&window, &map, &camera);
 	lst_3d = NULL;
 	parse(argv, map, lst_3d, window);
+	prepare_map(window);
 	render_map(window);
 	destroy_state(window, map, camera);
 }

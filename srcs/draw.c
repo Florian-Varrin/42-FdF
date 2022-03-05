@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:14:02 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 17:07:12 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 11:47:28 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,27 @@ void	draw_map(t_image *image, t_map *map, t_2dpoint *points)
 
 void	render_map(t_window *window)
 {
-	t_list_el	*lst_3d;
-	t_2dpoint	*points_2d;
-	t_camera	*camera;
-	t_map		*map;
 	t_image		*image;
+	t_2dpoint	*arr_2d_points;
+	t_list_el	*lst_3d;
 
-	image = NULL;
-	camera = window->camera;
+	arr_2d_points = window->arr_2d_points;
 	lst_3d = window->lst_3d_points;
-	map = window->map;
-	points_2d = project_3d_to_isometric(&lst_3d, camera, map);
+	image = NULL;
+	project_3d_to_isometric(&lst_3d, arr_2d_points, window);
 	image = init_image(window, image);
-	draw_map(image, map, points_2d);
+	draw_map(image, window->map, arr_2d_points);
 	put_image_to_window(window, image);
 	mlx_loop(window->mlx);
+}
+
+void	prepare_map(t_window *window)
+{
+	int			number_of_points;
+	t_2dpoint	*points_2d;
+
+	number_of_points = ft_lstsize(window->lst_3d_points);
+	window->map->number_of_points = number_of_points;
+	points_2d = ft_calloc(number_of_points, sizeof(t_2dpoint));
+	window->arr_2d_points = points_2d;
 }

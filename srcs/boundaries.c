@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 10:30:07 by                   #+#    #+#             */
-/*   Updated: 2022/02/18 10:31:22 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 11:48:50 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ void	update_boundaries(
 
 void	set_boundaries(
 		t_boundaries *boundaries,
-		t_list_el **lst_2d_points
+		t_window *window,
+		t_2dpoint *arr_2d_points
 )
 {
-	t_list_el		*current_el;
+	int		i;
 
-	current_el = *lst_2d_points;
-	update_boundaries(boundaries, current_el->content, true);
-	while (current_el)
+	i = 0;
+	update_boundaries(boundaries, &arr_2d_points[i], true);
+	while (i < window->map->number_of_points)
 	{
-		update_boundaries(boundaries, current_el->content, false);
-		current_el = current_el->next;
+		update_boundaries(boundaries, &arr_2d_points[i], false);
+		i++;
 	}
 }

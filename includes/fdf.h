@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:53:38 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/03/03 17:35:05 by                  ###   ########.fr       */
+/*   Updated: 2022/03/05 11:55:35 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_window {
 	t_map		*map;
 	t_camera	*camera;
 	t_list_el	*lst_3d_points;
+	t_2dpoint	*arr_2d_points;
 }	t_window;
 
 // General
@@ -126,6 +127,7 @@ void		put_pixel_to_image(t_image *image, int x, int y, int color);
 void		draw_line(t_2dpoint *start, t_2dpoint *end, t_image *image);
 void		draw_map(t_image *image, t_map *map, t_2dpoint *points);
 void		render_map(t_window *window);
+void		prepare_map(t_window *window);
 
 // Parse
 void		parse_file(t_list_el **lst_3d_points, char *path, t_map *map);
@@ -136,8 +138,8 @@ void		destroy_point(void *content);
 // Projection
 t_2dpoint	*project_3d_to_isometric(
 				t_list_el **lst_3d_points,
-				t_camera *camera,
-				t_map *map
+				t_2dpoint *arr_2d_points,
+				t_window *window
 				);
 
 // Camera
@@ -156,7 +158,11 @@ void		print_matrix(double matrix[3][3], char *message);
 int			handle_key(int keycode, void *window);
 
 // Boundaries
-void		set_boundaries(t_boundaries *boundaries, t_list_el **lst_2d_points);
+void		set_boundaries(
+				t_boundaries *boundaries,
+				t_window *window,
+				t_2dpoint *arr_2d_points
+				);
 
 // Matrices
 t_3dpoint	*rotate_x_axis(t_3dpoint *point, double angle);

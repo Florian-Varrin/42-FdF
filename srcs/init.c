@@ -67,5 +67,6 @@ t_window	*init_window(
 	window->lst_3d_points = NULL;
 	window->map = NULL;
 	window->current_image = NULL;
+	window->arr_2d_points = NULL;
 	return (window);
 }
