@@ -35,3 +35,12 @@ int	handle_key(int keycode, void *config)
 		return (color_handler(window));
 	return (0);
 }
+
+int handle_close(void *config)
+{
+	t_window	*window;
+
+	window = config;
+	exit_program_gracefully(window);
+	return (0);
+}

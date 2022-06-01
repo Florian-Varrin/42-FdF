@@ -40,6 +40,20 @@
 #  define KEY_Q 12
 #  define KEY_P 35
 #  define KEY_N 45
+#  define KEY_C 8
+#  define KEY_ESC 53
+#  define KEY_UP 126
+#  define KEY_DOWN 125
+#  define KEY_LEFT 123
+#  define KEY_RIGHT 124
+#  define KEY_NUMPAD_UP 91
+#  define KEY_NUMPAD_DOWN 84
+#  define KEY_NUMPAD_LEFT 86
+#  define KEY_NUMPAD_RIGHT 88
+#  define KEY_MINUS 78
+#  define KEY_PLUS 69
+#  define KEY_DIVIDE 75
+#  define KEY_MULTIPLY 67
 # else
 #  define KEY_Q 113
 #  define KEY_P 112
@@ -59,6 +73,8 @@
 #  define KEY_DIVIDE 65455
 #  define KEY_MULTIPLY 65450
 # endif
+
+# define CLOSE_EVENT 17
 
 typedef struct s_2dpoint {
 	double	x;
@@ -164,6 +180,7 @@ void		set_camera_zoom(t_boundaries *boundaries, t_camera *camera);
 
 // Handle
 int			handle_key(int keycode, void *window);
+int 		handle_close(void *config);
 
 // Boundaries
 void		set_boundaries(
