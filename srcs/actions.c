@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "fdf.h"
 
 int	handle_key(int keycode, void *config)
