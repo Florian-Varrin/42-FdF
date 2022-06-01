@@ -61,5 +61,4 @@ re:		fclean ${NAME}
 
 norm:		fclean
 			echo "\n\n"
-			${NORM_BIN} ${NORM_FLAGS} ${SRC}
-			${NORM_BIN} ${NORM_FLAGS} ${HEADER_DIR}
+			${NORM_BIN} ${NORM_FLAGS} ${SRC} ${HEADER_DIR}

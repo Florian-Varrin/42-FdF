@@ -36,7 +36,7 @@ int	handle_key(int keycode, void *config)
 	return (0);
 }
 
-int handle_close(void *config)
+int	handle_close(void *config)
 {
 	t_window	*window;
 

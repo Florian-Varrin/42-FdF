@@ -180,7 +180,7 @@ void		set_camera_zoom(t_boundaries *boundaries, t_camera *camera);
 
 // Handle
 int			handle_key(int keycode, void *window);
-int 		handle_close(void *config);
+int			handle_close(void *config);
 
 // Boundaries
 void		set_boundaries(
