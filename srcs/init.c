@@ -73,6 +73,7 @@ t_window	*init_window(
 			WINDOW_NAME
 			);
 	mlx_key_hook(window->win, handle_key, window);
+	mlx_hook(window->win, CLOSE_EVENT, 0, handle_close, window);
 	window->lst_3d_points = NULL;
 	window->map = NULL;
 	window->current_image = NULL;

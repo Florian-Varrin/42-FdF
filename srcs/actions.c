@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf.h>
 #include "fdf.h"
 
 int	handle_key(int keycode, void *config)
@@ -34,5 +33,14 @@ int	handle_key(int keycode, void *config)
 		return (zoom_handler(keycode, window));
 	if (keycode == KEY_C)
 		return (color_handler(window));
+	return (0);
+}
+
+int handle_close(void *config)
+{
+	t_window	*window;
+
+	window = config;
+	exit_program_gracefully(window);
 	return (0);
 }

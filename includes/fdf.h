@@ -74,6 +74,8 @@
 #  define KEY_MULTIPLY 65450
 # endif
 
+# define CLOSE_EVENT 17
+
 typedef struct s_2dpoint {
 	double	x;
 	double	y;
@@ -178,6 +180,7 @@ void		set_camera_zoom(t_boundaries *boundaries, t_camera *camera);
 
 // Handle
 int			handle_key(int keycode, void *window);
+int 		handle_close(void *config);
 
 // Boundaries
 void		set_boundaries(
